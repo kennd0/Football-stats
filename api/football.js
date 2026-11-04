@@ -1,4 +1,3 @@
-
 export default async function handler(req, res) {
   const token = process.env.FOOTBALL_DATA_TOKEN;
 
@@ -14,7 +13,7 @@ export default async function handler(req, res) {
     path === "matches" ||
     path === "competitions" ||
     /^competitions\/[A-Z0-9]{2,4}(\/(matches|standings|scorers))?$/.test(path) ||
-    /^teams\/\d+\/matches$/.test(path);
+    /^teams\/\d+(\/matches)?$/.test(path);
 
   if (!allowed) {
     return res.status(400).json({
@@ -35,6 +34,7 @@ export default async function handler(req, res) {
   }
 
   const query = params.toString();
+
   const url =
     `https://api.football-data.org/v4/${path}` +
     (query ? `?${query}` : "");
