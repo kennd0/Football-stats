@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="es">
 <head>
@@ -8,7 +9,6 @@
 <meta name="apple-mobile-web-app-title" content="Football Stats">
 <link rel="manifest" href="manifest.webmanifest">
 <title>Football Stats</title>
-
 <style>
 :root{--bg:#090b10;--red:#e51d35;--green:#198b3b;--loss:#c92c25;--draw:#666;--line:#292f3b}
 *{box-sizing:border-box}
@@ -21,24 +21,25 @@ body{margin:0;background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,
 .heading{display:flex;justify-content:space-between;align-items:center;margin:6px 4px 14px}
 .heading h1{font-size:23px;margin:0}.sub{color:#9ca3af;font-size:13px;margin-top:5px}
 .search{width:100%;padding:14px 15px;border-radius:12px;border:1px solid #333947;background:#151922;color:white;font-size:16px;margin:8px 0 14px}
-.filters{display:flex;gap:8px;overflow:auto;padding-bottom:14px}
-.chip{white-space:nowrap;border:1px solid #343a47;background:#151922;color:#d7dbe3;padding:9px 13px;border-radius:22px;font-size:13px}
-.chip.active{background:white;color:#202431;font-weight:700}
 .modebar{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:4px 0 16px}
 .mode{padding:13px 8px;border:1px solid #343a47;background:#151922;color:#c7ccd5;border-radius:11px;font-weight:750;font-size:14px}
 .mode.active{background:var(--red);border-color:var(--red);color:white}
+.filters{display:flex;gap:8px;overflow:auto;padding-bottom:14px}
+.chip{white-space:nowrap;border:1px solid #343a47;background:#151922;color:#d7dbe3;padding:9px 13px;border-radius:22px;font-size:13px}
+.chip.active{background:white;color:#202431;font-weight:700}
 .section-title{font-size:14px;color:#aeb5c2;font-weight:700;margin:12px 4px}
-.match{background:#171c26;border:1px solid var(--line);border-radius:13px;margin:9px 0;overflow:hidden}
-.matchtop{display:flex;justify-content:space-between;gap:8px;padding:12px 14px;color:#aeb5c2;font-size:12px;border-bottom:1px solid var(--line)}
-.matchmain{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:16px 14px;gap:8px}
-.team{font-weight:700;font-size:15px}.team:last-child{text-align:right}
-.score{font-size:20px;font-weight:800;white-space:nowrap}
-.matchfoot{display:flex;justify-content:space-between;align-items:center;padding:0 14px 12px;color:#aeb5c2;font-size:12px}
-.details{border:0;background:#252c39;color:white;border-radius:8px;padding:8px 12px;font-weight:650}
 .selectrow{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:0 0 14px}
 .selectbox{width:100%;min-width:0;padding:12px 10px;border-radius:10px;border:1px solid #343a47;background:#151922;color:white;font-size:13px}
 .datefilters{display:flex;gap:8px;overflow:auto;padding:0 0 13px}
-.panel{background:white;color:#252936;border-radius:16px 16px 0 0;min-height:60vh;margin:18px -12px 0;overflow:hidden}
+.match{background:#171c26;border:1px solid var(--line);border-radius:13px;margin:9px 0;overflow:hidden}
+.matchtop{display:flex;justify-content:space-between;gap:8px;padding:12px 14px;color:#aeb5c2;font-size:12px;border-bottom:1px solid var(--line)}
+.matchmain{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:16px 14px;gap:8px}
+.team{font-weight:700;font-size:14px;line-height:1.4}.team:last-child{text-align:right}
+.team img{width:23px;height:23px;object-fit:contain;vertical-align:middle;margin:0 4px}
+.score{font-size:20px;font-weight:800;white-space:nowrap}
+.matchfoot{display:flex;justify-content:space-between;align-items:center;padding:0 14px 12px;color:#aeb5c2;font-size:12px}
+.details{border:0;background:#252c39;color:white;border-radius:8px;padding:8px 12px;font-weight:650}
+.panel{background:white;color:#252936;border-radius:16px 16px 0 0;min-height:50vh;margin:18px -12px 0;overflow:hidden}
 .panelhead{padding:20px 18px 16px;border-bottom:1px solid #e8e9ed;display:flex;justify-content:space-between;align-items:center}
 .panelhead h2{font-size:20px;margin:0}.close{border:0;background:none;font-size:27px;color:#343a46}
 .tabs{display:flex;overflow:auto;border-bottom:1px solid #e8e9ed}
@@ -50,21 +51,22 @@ body{margin:0;background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,
 .date{color:#505663}.fixture{line-height:1.35}.resultscore{text-align:right;font-weight:800}
 .badge{display:inline-flex;align-items:center;justify-content:center;width:27px;height:27px;border-radius:7px;color:white;font-weight:800;font-size:12px}
 .W{background:var(--green)}.L{background:var(--loss)}.D{background:var(--draw)}
-.tablewrap{overflow:auto}table{border-collapse:collapse;width:100%;min-width:520px;font-size:13px}
-th{background:#eeeef2;text-align:left;padding:12px 9px}td{padding:12px 9px;border-bottom:1px solid #eee}
-.facts{padding:8px 16px}.fact{display:flex;justify-content:space-between;padding:14px 2px;border-bottom:1px solid #eee}
-.muted{color:#737987}.empty{text-align:center;color:#737987;padding:35px 15px}
+.tablewrap{overflow:auto}
+table{border-collapse:collapse;width:100%;min-width:520px;font-size:13px}
+th{background:#eeeef2;text-align:left;padding:12px 9px}
+td{padding:12px 9px;border-bottom:1px solid #eee}
+.empty{text-align:center;color:#737987;padding:35px 15px}
 .notice{font-size:12px;color:#aab1be;text-align:center;padding:16px 10px}
 .hidden{display:none!important}.loading{text-align:center;color:#aeb5c2;padding:30px}
 .error{color:#ff8585;text-align:center;padding:20px}
 @media(min-width:700px){.wrap{padding-top:28px}.panel{margin-left:0;margin-right:0;border-radius:16px}.matchmain{padding:19px 18px}}
 </style>
 </head>
-
 <body>
+
 <header class="top">
  <div class="brand">FOOTBALL <span>STATS</span></div>
- <div class="live"><i></i> DATOS API</div>
+ <div class="live"><i></i> FOOTBALL DATA</div>
 </header>
 
 <main class="wrap">
@@ -72,7 +74,7 @@ th{background:#eeeef2;text-align:left;padding:12px 9px}td{padding:12px 9px;borde
  <div class="heading">
   <div>
    <h1>Partidos</h1>
-   <div class="sub" id="subtitle">Buscando encuentros...</div>
+   <div class="sub" id="subtitle">Conectando...</div>
   </div>
  </div>
 
@@ -84,7 +86,6 @@ th{background:#eeeef2;text-align:left;padding:12px 9px}td{padding:12px 9px;borde
  <input id="search" class="search" placeholder="Buscar equipo o competición..." autocomplete="off">
 
  <div id="upcomingControls" class="hidden">
-
   <div class="section-title">PERIODO</div>
   <div class="datefilters" id="dateFilters">
    <button class="chip" data-days="1">Hoy</button>
@@ -92,7 +93,7 @@ th{background:#eeeef2;text-align:left;padding:12px 9px}td{padding:12px 9px;borde
    <button class="chip" data-days="30">30 días</button>
   </div>
 
-  <div class="section-title">FILTRAR POR PAÍS Y COMPETICIÓN</div>
+  <div class="section-title">PAÍS Y COMPETICIÓN</div>
   <div class="selectrow">
    <select id="countryFilter" class="selectbox">
     <option value="">Todos los países</option>
@@ -101,19 +102,14 @@ th{background:#eeeef2;text-align:left;padding:12px 9px}td{padding:12px 9px;borde
     <option value="">Todas las competiciones</option>
    </select>
   </div>
-
  </div>
 
- <div class="filters" id="filters">
-  <button class="chip active" data-filter="Todos">Todos</button>
-  <button class="chip" data-filter="En directo">En directo</button>
+ <div id="matches">
+  <div class="loading">Cargando partidos...</div>
  </div>
 
- <div class="section-title" id="sectionTitle">PARTIDOS</div>
- <div id="matches"><div class="loading">Cargando partidos...</div></div>
-
- <div class="notice" id="notice">
-  Los datos proceden de API-Football. La disponibilidad depende de la competición y del plan de la API.
+ <div class="notice">
+  Datos de football-data.org. La cobertura depende del plan gratuito.
  </div>
 
  <section id="detail" class="panel hidden">
@@ -127,9 +123,7 @@ th{background:#eeeef2;text-align:left;padding:12px 9px}td{padding:12px 9px;borde
 
   <nav class="tabs">
    <div class="tab active" data-tab="form">Últimos resultados</div>
-   <div class="tab" data-tab="h2h">Enfrentamientos</div>
    <div class="tab" data-tab="table">Clasificación</div>
-   <div class="tab" data-tab="facts">Estadísticas</div>
   </nav>
 
   <div id="tabContent" class="content">
@@ -141,120 +135,120 @@ th{background:#eeeef2;text-align:left;padding:12px 9px}td{padding:12px 9px;borde
 <script>
 const $=s=>document.querySelector(s);
 
-let games=[];
 let liveGames=[];
 let upcomingGames=[];
+let games=[];
 let selected=null;
-let filter='Todos';
-let tab='form';
 let mode='live';
 let period=7;
+let tab='form';
 
-const liveCodes=['1H','2H','HT','ET','P','LIVE','INT'];
-
-function localDate(d){
- const year=d.getFullYear();
- const month=String(d.getMonth()+1).padStart(2,'0');
- const day=String(d.getDate()).padStart(2,'0');
- return `${year}-${month}-${day}`;
-}
-
-function matchDate(f){
- return new Date(f.fixture.date).toLocaleString('es-ES',{
-  day:'2-digit',
-  month:'2-digit',
-  hour:'2-digit',
-  minute:'2-digit'
- });
-}
-
-function isLive(f){
- return liveCodes.includes(f.fixture.status.short);
-}
-
-async function api(params){
- const query=new URLSearchParams(params);
- const response=await fetch('/api/football?'+query.toString());
- const data=await response.json();
-
- if(!response.ok || data.errors && Object.keys(data.errors).length){
-  throw new Error(JSON.stringify(data.errors||data));
- }
-
- return data.response||[];
-}
-
-function mapGame(f){
- return {
-  id:f.fixture.id,
-  comp:f.league.name,
-  leagueId:f.league.id,
-  season:f.league.season,
-  date:matchDate(f),
-  timestamp:new Date(f.fixture.date).getTime(),
-  home:f.teams.home.name,
-  away:f.teams.away.name,
-  homeId:f.teams.home.id,
-  awayId:f.teams.away.id,
-  homeLogo:f.teams.home.logo,
-  awayLogo:f.teams.away.logo,
-  score:(f.goals.home??'-')+' : '+(f.goals.away??'-'),
-  status:f.fixture.status.short,
-  elapsed:f.fixture.status.elapsed,
-  country:f.league.country||'Internacional',
-  flag:f.league.flag
- };
-}
+const competitions=[
+ {code:'PL',name:'Premier League',country:'Inglaterra'},
+ {code:'PD',name:'La Liga',country:'España'},
+ {code:'BL1',name:'Bundesliga',country:'Alemania'},
+ {code:'SA',name:'Serie A',country:'Italia'},
+ {code:'FL1',name:'Ligue 1',country:'Francia'},
+ {code:'CL',name:'Champions League',country:'Europa'},
+ {code:'EL',name:'Europa League',country:'Europa'},
+ {code:'DED',name:'Eredivisie',country:'Países Bajos'},
+ {code:'PPL',name:'Primeira Liga',country:'Portugal'},
+ {code:'BSA',name:'Brasileirão',country:'Brasil'}
+];
 
 function escapeHTML(s){
  return String(s??'').replace(/[&<>"']/g,c=>({
-  '&':'&amp;',
-  '<':'&lt;',
-  '>':'&gt;',
-  '"':'&quot;',
-  "'":'&#39;'
+  '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
  }[c]));
+}
+
+function localDate(d){
+ const y=d.getFullYear();
+ const m=String(d.getMonth()+1).padStart(2,'0');
+ const day=String(d.getDate()).padStart(2,'0');
+ return `${y}-${m}-${day}`;
+}
+
+function formatDate(date){
+ return new Date(date).toLocaleString('es-ES',{
+  day:'2-digit',month:'2-digit',
+  hour:'2-digit',minute:'2-digit'
+ });
+}
+
+function mapMatch(m){
+ return {
+  id:m.id,
+  comp:m.competition?.name||'Competición',
+  code:m.competition?.code||'',
+  country:m.area?.name||'Internacional',
+  date:formatDate(m.utcDate),
+  timestamp:new Date(m.utcDate).getTime(),
+  home:m.homeTeam?.name||'Por confirmar',
+  away:m.awayTeam?.name||'Por confirmar',
+  homeId:m.homeTeam?.id,
+  awayId:m.awayTeam?.id,
+  homeLogo:m.homeTeam?.crest,
+  awayLogo:m.awayTeam?.crest,
+  status:m.status,
+  scoreHome:m.score?.fullTime?.home,
+  scoreAway:m.score?.fullTime?.away
+ };
+}
+
+async function api(path,params={}){
+ const query=new URLSearchParams({
+  path,
+  ...params
+ });
+
+ const response=await fetch('/api/football?'+query.toString());
+ const data=await response.json();
+
+ if(!response.ok){
+  throw new Error(data.message||data.error||'Error '+response.status);
+ }
+
+ return data;
+}
+
+function matchIsLive(g){
+ return ['IN_PLAY','PAUSED','LIVE'].includes(g.status);
+}
+
+function scoreText(g){
+ if(g.scoreHome===null||g.scoreHome===undefined)return 'VS';
+ return `${g.scoreHome} : ${g.scoreAway??'-'}`;
 }
 
 /* PARTIDOS EN DIRECTO */
 
 async function loadLive(){
- $('#matches').innerHTML='<div class="loading">Consultando partidos en directo...</div>';
- $('#subtitle').textContent='Conectando con API-Football...';
+ $('#matches').innerHTML='<div class="loading">Buscando partidos en directo...</div>';
+ $('#subtitle').textContent='Consultando partidos...';
 
  try{
-  const fixtures=await api({live:'all'});
-  liveGames=fixtures.map(mapGame);
+  const data=await api('matches',{status:'IN_PLAY,PAUSED'});
+  liveGames=(data.matches||[]).map(mapMatch);
   games=liveGames;
 
-  games.sort((a,b)=>a.timestamp-b.timestamp);
-
-  $('#sectionTitle').textContent='PARTIDOS EN DIRECTO';
-  $('#subtitle').textContent=games.length+' partidos en directo';
-  createLiveFilters();
+  $('#subtitle').textContent=liveGames.length+' partidos en directo';
   renderMatches();
 
-  if(!games.length){
-   $('#matches').innerHTML='<div class="empty">Ahora mismo no hay partidos en directo. Entra en Próximos partidos para consultar el calendario.</div>';
+  if(!liveGames.length){
+   $('#matches').innerHTML='<div class="empty">No hay partidos en directo disponibles. Consulta los próximos partidos.</div>';
   }
  }catch(e){
-  $('#matches').innerHTML='<div class="error">No se pudieron cargar los partidos.<br><small>'+escapeHTML(e.message)+'</small></div>';
-  $('#subtitle').textContent='Error al conectar';
+  $('#matches').innerHTML='<div class="error">Error al cargar partidos.<br>'+escapeHTML(e.message)+'</div>';
+  $('#subtitle').textContent='Error de conexión';
  }
-}
-
-function createLiveFilters(){
- $('#filters').innerHTML=
-  '<button class="chip active" data-filter="Todos">Todos</button>'+
-  '<button class="chip" data-filter="En directo">En directo</button>';
- filter='Todos';
 }
 
 /* PRÓXIMOS PARTIDOS */
 
 async function loadUpcoming(){
- $('#matches').innerHTML='<div class="loading">Buscando próximos partidos...</div>';
- $('#subtitle').textContent='Consultando calendario...';
+ $('#matches').innerHTML='<div class="loading">Consultando próximos partidos...</div>';
+ $('#subtitle').textContent='Cargando calendario...';
 
  try{
   const from=localDate(new Date());
@@ -262,43 +256,42 @@ async function loadUpcoming(){
   end.setDate(end.getDate()+period-1);
   const to=localDate(end);
 
-  const fixtures=await api({from,to});
+  const data=await api('matches',{
+   dateFrom:from,
+   dateTo:to,
+   status:'SCHEDULED'
+  });
 
-  upcomingGames=fixtures
-   .map(mapGame)
-   .filter(g=>!liveCodes.includes(g.status));
-
+  upcomingGames=(data.matches||[]).map(mapMatch);
   upcomingGames.sort((a,b)=>a.timestamp-b.timestamp);
-
   games=upcomingGames;
-  filter='Todos';
 
-  $('#sectionTitle').textContent='PRÓXIMOS PARTIDOS';
-  $('#subtitle').textContent=games.length+' partidos encontrados · Próximos '+period+' días';
+  $('#subtitle').textContent=games.length+' partidos · Próximos '+period+' días';
 
-  updateUpcomingFilters();
+  updateFilters();
   renderMatches();
 
   if(!games.length){
-   $('#matches').innerHTML='<div class="empty">No hay próximos partidos disponibles para este periodo.</div>';
+   $('#matches').innerHTML='<div class="empty">No hay partidos disponibles en este periodo.</div>';
   }
-
  }catch(e){
-  $('#matches').innerHTML='<div class="error">No se pudo cargar el calendario.<br><small>'+escapeHTML(e.message)+'</small></div>';
-  $('#subtitle').textContent='Error al consultar el calendario';
+  $('#matches').innerHTML='<div class="error">Error al consultar el calendario.<br>'+escapeHTML(e.message)+'</div>';
+  $('#subtitle').textContent='Error de conexión';
  }
 }
 
-function updateUpcomingFilters(){
- const countries=[...new Set(upcomingGames.map(g=>g.country))].sort();
- const currentCountry=$('#countryFilter').value;
+/* FILTROS */
+
+function updateFilters(){
+ const countries=[...new Set(games.map(g=>g.country))].sort();
+ const oldCountry=$('#countryFilter').value;
 
  $('#countryFilter').innerHTML=
   '<option value="">Todos los países</option>'+
   countries.map(c=>`<option value="${escapeHTML(c)}">${escapeHTML(c)}</option>`).join('');
 
- if(countries.includes(currentCountry)){
-  $('#countryFilter').value=currentCountry;
+ if(countries.includes(oldCountry)){
+  $('#countryFilter').value=oldCountry;
  }
 
  updateLeagueFilter();
@@ -306,106 +299,87 @@ function updateUpcomingFilters(){
 
 function updateLeagueFilter(){
  const country=$('#countryFilter').value;
-
- const available=upcomingGames.filter(g=>
-  !country||g.country===country
- );
-
- const leagues=[...new Set(available.map(g=>g.comp))].sort();
- const current=$('#leagueFilter').value;
+ const list=games.filter(g=>!country||g.country===country);
+ const leagues=[...new Set(list.map(g=>g.comp))].sort();
+ const old=$('#leagueFilter').value;
 
  $('#leagueFilter').innerHTML=
   '<option value="">Todas las competiciones</option>'+
   leagues.map(l=>`<option value="${escapeHTML(l)}">${escapeHTML(l)}</option>`).join('');
 
- if(leagues.includes(current)){
-  $('#leagueFilter').value=current;
- }
+ if(leagues.includes(old))$('#leagueFilter').value=old;
 }
 
 /* MOSTRAR PARTIDOS */
 
 function renderMatches(){
  const q=$('#search').value.toLowerCase();
- const country=$('#countryFilter').value;
- const league=$('#leagueFilter').value;
+ const country=mode==='upcoming'?$('#countryFilter').value:'';
+ const league=mode==='upcoming'?$('#leagueFilter').value:'';
 
  const list=games.filter(g=>{
-  const matchesMode=
-   mode==='upcoming'
-    ? true
-    : filter==='Todos'||(filter==='En directo'&&liveCodes.includes(g.status));
-
-  const matchesCountry=mode!=='upcoming'||!country||g.country===country;
-  const matchesLeague=mode!=='upcoming'||!league||g.comp===league;
-
-  const matchesSearch=
-   (g.home+' '+g.away+' '+g.comp+' '+g.country).toLowerCase().includes(q);
-
-  return matchesMode&&matchesCountry&&matchesLeague&&matchesSearch;
+  const search=(g.home+' '+g.away+' '+g.comp+' '+g.country).toLowerCase();
+  return search.includes(q)&&
+   (!country||g.country===country)&&
+   (!league||g.comp===league);
  });
 
  $('#matches').innerHTML=list.length?list.map(g=>{
-  const live=liveCodes.includes(g.status);
+  const live=matchIsLive(g);
 
   return `<article class="match">
    <div class="matchtop">
     <span>${escapeHTML(g.country)} · ${escapeHTML(g.comp)}</span>
-    <span>${live?'🔴 '+(g.elapsed??'')+"'":escapeHTML(g.date)}</span>
+    <span>${live?'🔴 EN DIRECTO':escapeHTML(g.date)}</span>
    </div>
 
    <div class="matchmain">
     <div class="team">
-     ${g.homeLogo?`<img src="${escapeHTML(g.homeLogo)}" alt="" style="width:23px;height:23px;object-fit:contain;vertical-align:middle;margin-right:5px">`:''}
+     ${g.homeLogo?`<img src="${escapeHTML(g.homeLogo)}" alt="">`:''}
      ${escapeHTML(g.home)}
     </div>
-
-    <div class="score">${live?g.score:'VS'}</div>
-
+    <div class="score">${scoreText(g)}</div>
     <div class="team">
-     ${g.awayLogo?`<img src="${escapeHTML(g.awayLogo)}" alt="" style="width:23px;height:23px;object-fit:contain;vertical-align:middle;margin-right:5px">`:''}
+     ${g.awayLogo?`<img src="${escapeHTML(g.awayLogo)}" alt="">`:''}
      ${escapeHTML(g.away)}
     </div>
    </div>
 
    <div class="matchfoot">
-    <span>${live?'EN DIRECTO':escapeHTML(g.status)}</span>
-    <button class="details" data-id="${g.id}">Ver estadísticas →</button>
+    <span>${escapeHTML(g.status)}</span>
+    <button class="details" data-id="${g.id}">Ver detalles →</button>
    </div>
   </article>`;
  }).join(''):'<div class="empty">No se encontraron partidos con estos filtros.</div>';
 
  document.querySelectorAll('[data-id]').forEach(b=>{
-  b.onclick=()=>openGame(+b.dataset.id);
+  b.onclick=()=>openGame(Number(b.dataset.id));
  });
 }
 
-/* CAMBIAR ENTRE VISTAS */
+/* CAMBIAR VISTA */
 
-function changeMode(newMode){
- mode=newMode;
+function changeMode(next){
+ mode=next;
+
  $('#liveMode').classList.toggle('active',mode==='live');
  $('#upcomingMode').classList.toggle('active',mode==='upcoming');
-
  $('#upcomingControls').classList.toggle('hidden',mode!=='upcoming');
- $('#filters').classList.toggle('hidden',mode==='upcoming');
  $('#detail').classList.add('hidden');
 
  if(mode==='live'){
   games=liveGames;
-  createLiveFilters();
-  $('#sectionTitle').textContent='PARTIDOS EN DIRECTO';
   $('#subtitle').textContent=games.length+' partidos en directo';
   renderMatches();
   if(!games.length){
-   $('#matches').innerHTML='<div class="empty">Ahora mismo no hay partidos en directo.</div>';
+   $('#matches').innerHTML='<div class="empty">No hay partidos en directo disponibles.</div>';
   }
  }else{
   loadUpcoming();
  }
 }
 
-/* DETALLES DEL PARTIDO */
+/* DETALLES */
 
 function openGame(id){
  selected=games.find(g=>g.id===id);
@@ -421,148 +395,93 @@ function openGame(id){
  $('#detail').scrollIntoView({behavior:'smooth',block:'start'});
 }
 
-function loading(){
- return '<div class="loading">Cargando datos reales...</div>';
-}
-
-function unavailable(msg){
- return '<div class="empty">'+escapeHTML(msg)+'</div>';
-}
-
 async function setTab(){
  document.querySelectorAll('.tab').forEach(x=>
   x.classList.toggle('active',x.dataset.tab===tab)
  );
 
- $('#tabContent').innerHTML=loading();
- if(!selected)return;
+ $('#tabContent').innerHTML='<div class="loading">Cargando...</div>';
 
- try{
-  if(tab==='form')await loadForm();
-  if(tab==='h2h')await loadH2H();
-  if(tab==='table')await loadTable();
-  if(tab==='facts')await loadFacts();
- }catch(e){
-  $('#tabContent').innerHTML=
-   '<div class="error">No se pudieron cargar estos datos.<br><small>'+
-   escapeHTML(e.message)+'</small></div>';
- }
+ if(tab==='form')await loadForm();
+ if(tab==='table')await loadTable();
 }
 
 async function loadForm(){
- const a=await api({team:selected.homeId,last:'5'});
- const b=await api({team:selected.awayId,last:'5'});
-
- const html=(team,rows)=>
-  '<h3>'+escapeHTML(team)+' · Últimos partidos</h3>'+
-  (rows.length?rows.map(f=>{
-   const home=f.teams.home.name;
-   const away=f.teams.away.name;
-   const hg=f.goals.home;
-   const ag=f.goals.away;
-
-   let outcome='D';
-
-   if((home===team&&hg>ag)||(away===team&&ag>hg))outcome='W';
-   if((home===team&&hg<ag)||(away===team&&ag<hg))outcome='L';
-
-   return `<div class="result">
-    <span class="date">${matchDate(f).split(',')[0]}</span>
-    <span class="fixture">${escapeHTML(home)} - ${escapeHTML(away)}</span>
-    <span class="resultscore">${hg??'-'} - ${ag??'-'}</span>
-    <span class="badge ${outcome}">${outcome}</span>
-   </div>`;
-  }).join(''):unavailable('No hay resultados disponibles.'));
-
- $('#tabContent').innerHTML=html(selected.home,a)+html(selected.away,b);
-}
-
-async function loadH2H(){
- const rows=await api({
-  endpoint:'fixtures/headtohead',
-  h2h:selected.homeId+'-'+selected.awayId
- });
-
- $('#tabContent').innerHTML=
-  '<h3>Enfrentamientos directos</h3>'+
-  (rows.length?rows.slice(0,20).map(f=>`
-   <div class="result">
-    <span class="date">${matchDate(f).split(',')[0]}</span>
-    <span class="fixture">${escapeHTML(f.teams.home.name)} - ${escapeHTML(f.teams.away.name)}</span>
-    <span class="resultscore">${f.goals.home??'-'} - ${f.goals.away??'-'}</span>
-    <span></span>
-   </div>`).join(''):unavailable('No hay enfrentamientos disponibles en la API.'));
-}
-
-async function loadTable(){
- const rows=await api({
-  endpoint:'standings',
-  league:selected.leagueId,
-  season:selected.season
- });
-
- const table=rows[0]?.league?.standings?.[0]||[];
-
- $('#tabContent').innerHTML=
-  '<h3>Clasificación · '+escapeHTML(selected.comp)+'</h3>'+
-  (table.length?
-   '<div class="tablewrap"><table><thead><tr><th>Pos</th><th>Equipo</th><th>PJ</th><th>DG</th><th>PTS</th></tr></thead><tbody>'+
-   table.map(r=>`
-    <tr>
-     <td>${r.rank}</td>
-     <td><b>${escapeHTML(r.team.name)}</b></td>
-     <td>${r.all.played}</td>
-     <td>${r.goalsDiff}</td>
-     <td><b>${r.points}</b></td>
-    </tr>`).join('')+
-   '</tbody></table></div>':
-   unavailable('No hay clasificación disponible para esta competición.'));
-}
-
-async function loadFacts(){
- const rows=await api({
-  endpoint:'fixtures/statistics',
-  fixture:selected.id
- });
-
- const home=rows.find(x=>x.team.id===selected.homeId);
- const away=rows.find(x=>x.team.id===selected.awayId);
-
- if(!home||!away){
-  $('#tabContent').innerHTML=unavailable(
-   'Las estadísticas detalladas todavía no están disponibles. Normalmente aparecen durante o después del partido.'
-  );
+ if(!selected.homeId||!selected.awayId){
+  $('#tabContent').innerHTML='<div class="empty">No hay identificadores de equipo disponibles.</div>';
   return;
  }
 
- const get=(arr,type)=>
-  arr.statistics.find(s=>s.type===type)?.value??'—';
+ try{
+  const [a,b]=await Promise.all([
+   api(`teams/${selected.homeId}/matches`,{status:'FINISHED',limit:'5'}),
+   api(`teams/${selected.awayId}/matches`,{status:'FINISHED',limit:'5'})
+  ]);
 
- const types=[
-  'Ball Possession','Total Shots','Shots on Goal','Corner Kicks',
-  'Fouls','Yellow Cards','Red Cards','Offsides'
- ];
+  function teamResults(team,rows){
+   const matches=rows.matches||[];
 
- const labels={
-  'Ball Possession':'Posesión',
-  'Total Shots':'Tiros totales',
-  'Shots on Goal':'Tiros a puerta',
-  'Corner Kicks':'Córners',
-  'Fouls':'Faltas',
-  'Yellow Cards':'Tarjetas amarillas',
-  'Red Cards':'Tarjetas rojas',
-  'Offsides':'Fuera de juego'
- };
+   return '<h3>'+escapeHTML(team)+' · Últimos resultados</h3>'+
+   (matches.length?matches.map(m=>{
+    const home=m.homeTeam.name;
+    const away=m.awayTeam.name;
+    const hg=m.score.fullTime.home;
+    const ag=m.score.fullTime.away;
 
- $('#tabContent').innerHTML=
-  '<h3>Estadísticas del partido</h3><div class="facts">'+
-  types.map(t=>`
-   <div class="fact">
-    <b>${get(home,t)}</b>
-    <span>${labels[t]}</span>
-    <b>${get(away,t)}</b>
-   </div>`).join('')+
-  '</div>';
+    let result='D';
+
+    const isHome=home===team;
+    const own=isHome?hg:ag;
+    const other=isHome?ag:hg;
+
+    if(own>other)result='W';
+    if(own<other)result='L';
+
+    return `<div class="result">
+     <span class="date">${formatDate(m.utcDate).split(',')[0]}</span>
+     <span class="fixture">${escapeHTML(home)} - ${escapeHTML(away)}</span>
+     <span class="resultscore">${hg??'-'} - ${ag??'-'}</span>
+     <span class="badge ${result}">${result}</span>
+    </div>`;
+   }).join(''):'<div class="empty">No hay resultados disponibles.</div>');
+  }
+
+  $('#tabContent').innerHTML=
+   teamResults(selected.home,a)+teamResults(selected.away,b);
+
+ }catch(e){
+  $('#tabContent').innerHTML='<div class="empty">No se pudieron consultar los últimos resultados. '+escapeHTML(e.message)+'</div>';
+ }
+}
+
+async function loadTable(){
+ if(!selected.code){
+  $('#tabContent').innerHTML='<div class="empty">No hay código de competición disponible.</div>';
+  return;
+ }
+
+ try{
+  const data=await api(`competitions/${selected.code}/standings`);
+  const table=data.standings?.find(s=>s.type==='TOTAL')?.table||[];
+
+  $('#tabContent').innerHTML=
+   '<h3>Clasificación · '+escapeHTML(selected.comp)+'</h3>'+
+   (table.length?
+    '<div class="tablewrap"><table><thead><tr><th>Pos</th><th>Equipo</th><th>PJ</th><th>DG</th><th>PTS</th></tr></thead><tbody>'+
+    table.map(r=>`
+     <tr>
+      <td>${r.position}</td>
+      <td><b>${escapeHTML(r.team.name)}</b></td>
+      <td>${r.playedGames}</td>
+      <td>${r.goalDifference}</td>
+      <td><b>${r.points}</b></td>
+     </tr>`).join('')+
+    '</tbody></table></div>':
+    '<div class="empty">No hay clasificación disponible para esta competición en tu plan.</div>');
+
+ }catch(e){
+  $('#tabContent').innerHTML='<div class="empty">La clasificación no está disponible para esta competición o temporada. '+escapeHTML(e.message)+'</div>';
+ }
 }
 
 /* EVENTOS */
@@ -571,19 +490,6 @@ $('#liveMode').onclick=()=>changeMode('live');
 $('#upcomingMode').onclick=()=>changeMode('upcoming');
 
 $('#search').addEventListener('input',renderMatches);
-
-$('#filters').addEventListener('click',e=>{
- const b=e.target.closest('button');
- if(!b)return;
-
- filter=b.dataset.filter;
-
- document.querySelectorAll('#filters .chip').forEach(x=>
-  x.classList.toggle('active',x===b)
- );
-
- renderMatches();
-});
 
 $('#dateFilters').addEventListener('click',e=>{
  const b=e.target.closest('button');
@@ -614,17 +520,14 @@ document.querySelectorAll('.tab').forEach(x=>
 
 $('#close').onclick=()=>$('#detail').classList.add('hidden');
 
-/* INICIO Y ACTUALIZACIÓN */
+/* INICIO */
 
 loadLive();
 
 setInterval(()=>{
  if(mode==='live')loadLive();
-},60000);
+},180000);
 
-if('serviceWorker' in navigator && location.protocol.startsWith('http')){
- navigator.serviceWorker.register('./sw.js').catch(()=>{});
-}
 </script>
 </body>
 </html>
