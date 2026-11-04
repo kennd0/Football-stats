@@ -1,7 +1,7 @@
 export default async function handler(req, res) {
   const source = req.query.source;
 
-  // CONEXIÓN 2: API-FOOTBALL
+  // API-FOOTBALL
   if (source === "apisports") {
     const apiSportsKey = process.env.APISPORTS_KEY;
 
@@ -13,22 +13,39 @@ export default async function handler(req, res) {
 
     const path = req.query.path || "status";
 
-    // Por ahora solo comprobamos el estado de la cuenta
-    if (path !== "status") {
+    const allowedApiSports = ["status", "leagues"];
+
+    if (!allowedApiSports.includes(path)) {
       return res.status(400).json({
-        error: "Ruta de comprobación no permitida"
+        error: "Ruta no permitida"
       });
     }
 
+    const params = new URLSearchParams();
+
+    for (const [key, value] of Object.entries(req.query)) {
+      if (
+        key !== "path" &&
+        key !== "source" &&
+        key !== "utm_source" &&
+        typeof value === "string"
+      ) {
+        params.set(key, value);
+      }
+    }
+
+    const query = params.toString();
+
+    const url =
+      `https://v3.football.api-sports.io/${path}` +
+      (query ? `?${query}` : "");
+
     try {
-      const response = await fetch(
-        "https://v3.football.api-sports.io/status",
-        {
-          headers: {
-            "x-apisports-key": apiSportsKey
-          }
+      const response = await fetch(url, {
+        headers: {
+          "x-apisports-key": apiSportsKey
         }
-      );
+      });
 
       const data = await response.json();
 
@@ -43,7 +60,7 @@ export default async function handler(req, res) {
     }
   }
 
-  // CONEXIÓN 1: FOOTBALL-DATA.ORG
+  // FOOTBALL-DATA.ORG
   const token = process.env.FOOTBALL_DATA_TOKEN;
 
   if (!token) {
