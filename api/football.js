@@ -19,13 +19,19 @@ export default async function handler(req, res) {
   const endpoint = req.query.endpoint || "fixtures";
 
   if (!allowed.includes(endpoint)) {
-    return res.status(400).json({ error: "Endpoint no permitido" });
+    return res.status(400).json({
+      error: "Endpoint no permitido"
+    });
   }
 
   const params = new URLSearchParams();
 
   for (const [k, v] of Object.entries(req.query)) {
-    if (k !== "endpoint" && typeof v === "string") {
+    if (
+      k !== "endpoint" &&
+      k !== "utm_source" &&
+      typeof v === "string"
+    ) {
       params.set(k, v);
     }
   }
@@ -35,13 +41,16 @@ export default async function handler(req, res) {
 
   try {
     const response = await fetch(url, {
-      headers: { "x-apisports-key": key }
+      headers: {
+        "x-apisports-key": key
+      }
     });
 
     const data = await response.json();
 
     return res.status(response.status).json(data);
-  } catch {
+
+  } catch (error) {
     return res.status(502).json({
       error: "Error conectando con API-Football"
     });
