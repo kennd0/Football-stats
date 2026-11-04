@@ -1,58 +1,69 @@
 
 export default async function handler(req, res) {
-  const key = process.env.APISPORTS_KEY;
+  const token = process.env.FOOTBALL_DATA_TOKEN;
 
-  if (!key) {
+  if (!token) {
     return res.status(500).json({
-      error: "Falta configurar APISPORTS_KEY en Vercel"
+      error: "Falta configurar FOOTBALL_DATA_TOKEN en Vercel"
     });
   }
 
-  const allowed = [
-    "fixtures",
-    "standings",
-    "fixtures/headtohead",
-    "fixtures/statistics",
-    "fixtures/last"
-  ];
+  const path = req.query.path || "matches";
 
-  const endpoint = req.query.endpoint || "fixtures";
+  const allowed =
+    path === "matches" ||
+    path === "competitions" ||
+    /^competitions\/[A-Z0-9]{2,4}(\/(matches|standings|scorers))?$/.test(path) ||
+    /^teams\/\d+\/matches$/.test(path);
 
-  if (!allowed.includes(endpoint)) {
+  if (!allowed) {
     return res.status(400).json({
-      error: "Endpoint no permitido"
+      error: "Ruta no permitida"
     });
   }
 
   const params = new URLSearchParams();
 
-  for (const [k, v] of Object.entries(req.query)) {
+  for (const [key, value] of Object.entries(req.query)) {
     if (
-      k !== "endpoint" &&
-      k !== "utm_source" &&
-      typeof v === "string"
+      key !== "path" &&
+      key !== "utm_source" &&
+      typeof value === "string"
     ) {
-      params.set(k, v);
+      params.set(key, value);
     }
   }
 
+  const query = params.toString();
   const url =
-    `https://v3.football.api-sports.io/${endpoint}?${params}`;
+    `https://api.football-data.org/v4/${path}` +
+    (query ? `?${query}` : "");
 
   try {
     const response = await fetch(url, {
       headers: {
-        "x-apisports-key": key
+        "X-Auth-Token": token
       }
     });
 
     const data = await response.json();
 
+    const cacheTime = path.includes("standings")
+      ? 21600
+      : path === "competitions"
+      ? 86400
+      : 900;
+
+    res.setHeader(
+      "Cache-Control",
+      `public, s-maxage=${cacheTime}, stale-while-revalidate=60`
+    );
+
     return res.status(response.status).json(data);
 
   } catch (error) {
     return res.status(502).json({
-      error: "Error conectando con API-Football"
+      error: "Error conectando con football-data.org"
     });
   }
 }
