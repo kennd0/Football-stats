@@ -9,8 +9,9 @@
 <meta name="apple-mobile-web-app-title" content="Football Stats">
 <link rel="manifest" href="manifest.webmanifest">
 <title>Football Stats</title>
+
 <style>
-:root{--bg:#090b10;--red:#e51d35;--green:#198b3b;--loss:#c92c25;--draw:#666;--line:#292f3b}
+:root{--bg:#090b10;--red:#e51d35;--green:#198b3b;--loss:#c92c25;--line:#292f3b}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;color:white}
 .top{height:72px;padding:17px 18px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #222630;position:sticky;top:0;background:#090b10;z-index:3}
@@ -19,7 +20,8 @@ body{margin:0;background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,
 .live i{display:inline-block;width:7px;height:7px;background:#f04444;border-radius:50%;margin-right:5px}
 .wrap{max-width:900px;margin:auto;padding:18px 12px 40px}
 .heading{display:flex;justify-content:space-between;align-items:center;margin:6px 4px 14px}
-.heading h1{font-size:23px;margin:0}.sub{color:#9ca3af;font-size:13px;margin-top:5px}
+.heading h1{font-size:23px;margin:0}
+.sub{color:#9ca3af;font-size:13px;margin-top:5px}
 .search{width:100%;padding:14px 15px;border-radius:12px;border:1px solid #333947;background:#151922;color:white;font-size:16px;margin:8px 0 14px}
 .modebar{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:4px 0 16px}
 .mode{padding:13px 8px;border:1px solid #343a47;background:#151922;color:#c7ccd5;border-radius:11px;font-weight:750;font-size:14px}
@@ -34,43 +36,53 @@ body{margin:0;background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,
 .match{background:#171c26;border:1px solid var(--line);border-radius:13px;margin:9px 0;overflow:hidden}
 .matchtop{display:flex;justify-content:space-between;gap:8px;padding:12px 14px;color:#aeb5c2;font-size:12px;border-bottom:1px solid var(--line)}
 .matchmain{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:16px 14px;gap:8px}
-.team{font-weight:700;font-size:14px;line-height:1.4}.team:last-child{text-align:right}
-.team img{width:23px;height:23px;object-fit:contain;vertical-align:middle;margin:0 4px}
+.team{font-weight:700;font-size:14px;line-height:1.4;overflow-wrap:anywhere}
+.team:last-child{text-align:right}
+.team img{width:25px;height:25px;object-fit:contain;vertical-align:middle;margin:0 4px}
 .score{font-size:20px;font-weight:800;white-space:nowrap}
 .matchfoot{display:flex;justify-content:space-between;align-items:center;padding:0 14px 12px;color:#aeb5c2;font-size:12px}
 .details{border:0;background:#252c39;color:white;border-radius:8px;padding:8px 12px;font-weight:650}
 .panel{background:white;color:#252936;border-radius:16px 16px 0 0;min-height:50vh;margin:18px -12px 0;overflow:hidden}
 .panelhead{padding:20px 18px 16px;border-bottom:1px solid #e8e9ed;display:flex;justify-content:space-between;align-items:center}
-.panelhead h2{font-size:20px;margin:0}.close{border:0;background:none;font-size:27px;color:#343a46}
+.panelhead h2{font-size:20px;margin:0}
+.close{border:0;background:none;font-size:27px;color:#343a46}
 .tabs{display:flex;overflow:auto;border-bottom:1px solid #e8e9ed}
 .tab{flex:1;min-width:max-content;padding:16px 12px;text-align:center;color:#777;font-weight:600;border-bottom:4px solid transparent;font-size:13px}
 .tab.active{color:#252936;border-color:var(--red)}
-.content{padding:18px 0 30px}.content h3{text-align:center;font-size:17px;margin:5px 10px 17px}
-.result{display:grid;grid-template-columns:75px 1fr 55px 30px;gap:6px;align-items:center;padding:13px 12px;font-size:13px}
+.content{padding:18px 0 30px}
+.content h3{text-align:center;font-size:17px;margin:5px 10px 17px}
+.result{display:grid;grid-template-columns:65px 1fr 65px 28px;gap:6px;align-items:center;padding:13px 12px;font-size:12px}
 .result:nth-child(even){background:#f3f3f5}
-.date{color:#505663}.fixture{line-height:1.35}.resultscore{text-align:right;font-weight:800}
-.badge{display:inline-flex;align-items:center;justify-content:center;width:27px;height:27px;border-radius:7px;color:white;font-weight:800;font-size:12px}
-.W{background:var(--green)}.L{background:var(--loss)}.D{background:var(--draw)}
+.date{color:#505663}
+.fixture{line-height:1.35}
+.resultscore{text-align:right;font-weight:800}
+.badge{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:7px;color:white;font-weight:800;font-size:11px}
+.W{background:var(--green)}.L{background:var(--loss)}.D{background:#666}
 .tablewrap{overflow:auto}
-table{border-collapse:collapse;width:100%;min-width:520px;font-size:13px}
+table{border-collapse:collapse;width:100%;min-width:480px;font-size:12px}
 th{background:#eeeef2;text-align:left;padding:12px 9px}
 td{padding:12px 9px;border-bottom:1px solid #eee}
-.empty{text-align:center;color:#737987;padding:35px 15px}
+.empty{text-align:center;color:#737987;padding:25px 15px}
 .notice{font-size:12px;color:#aab1be;text-align:center;padding:16px 10px}
-.hidden{display:none!important}.loading{text-align:center;color:#aeb5c2;padding:30px}
+.hidden{display:none!important}
+.loading{text-align:center;color:#aeb5c2;padding:30px}
 .error{color:#ff8585;text-align:center;padding:20px}
+.teamblock{margin-bottom:25px}
+.teamheading{padding:13px 15px;background:#f0f0f3;font-weight:800;font-size:15px}
+.comptitle{padding:12px 14px 5px;font-size:13px;font-weight:750;color:#555}
+.info{padding:13px 15px;background:#f5f5f7;color:#555;font-size:13px;line-height:1.5;margin:10px;border-radius:9px}
+.tag{display:inline-block;background:#eee;color:#555;padding:4px 7px;border-radius:5px;font-size:10px;margin-left:5px}
 @media(min-width:700px){.wrap{padding-top:28px}.panel{margin-left:0;margin-right:0;border-radius:16px}.matchmain{padding:19px 18px}}
 </style>
 </head>
-<body>
 
+<body>
 <header class="top">
  <div class="brand">FOOTBALL <span>STATS</span></div>
  <div class="live"><i></i> FOOTBALL DATA</div>
 </header>
 
 <main class="wrap">
-
  <div class="heading">
   <div>
    <h1>Partidos</h1>
@@ -109,7 +121,7 @@ td{padding:12px 9px;border-bottom:1px solid #eee}
  </div>
 
  <div class="notice">
-  Datos de football-data.org. La cobertura depende del plan gratuito.
+  Datos de football-data.org. La cobertura depende del plan contratado.
  </div>
 
  <section id="detail" class="panel hidden">
@@ -122,8 +134,8 @@ td{padding:12px 9px;border-bottom:1px solid #eee}
   </div>
 
   <nav class="tabs">
-   <div class="tab active" data-tab="form">Últimos resultados</div>
-   <div class="tab" data-tab="table">Clasificación</div>
+   <div class="tab active" data-tab="form">Últimos partidos</div>
+   <div class="tab" data-tab="table">Clasificaciones</div>
   </nav>
 
   <div id="tabContent" class="content">
@@ -142,19 +154,7 @@ let selected=null;
 let mode='live';
 let period=7;
 let tab='form';
-
-const competitions=[
- {code:'PL',name:'Premier League',country:'Inglaterra'},
- {code:'PD',name:'La Liga',country:'España'},
- {code:'BL1',name:'Bundesliga',country:'Alemania'},
- {code:'SA',name:'Serie A',country:'Italia'},
- {code:'FL1',name:'Ligue 1',country:'Francia'},
- {code:'CL',name:'Champions League',country:'Europa'},
- {code:'EL',name:'Europa League',country:'Europa'},
- {code:'DED',name:'Eredivisie',country:'Países Bajos'},
- {code:'PPL',name:'Primeira Liga',country:'Portugal'},
- {code:'BSA',name:'Brasileirão',country:'Brasil'}
-];
+let teamCache={};
 
 function escapeHTML(s){
  return String(s??'').replace(/[&<>"']/g,c=>({
@@ -181,6 +181,7 @@ function mapMatch(m){
   id:m.id,
   comp:m.competition?.name||'Competición',
   code:m.competition?.code||'',
+  competitionType:m.competition?.type||'',
   country:m.area?.name||'Internacional',
   date:formatDate(m.utcDate),
   timestamp:new Date(m.utcDate).getTime(),
@@ -197,18 +198,13 @@ function mapMatch(m){
 }
 
 async function api(path,params={}){
- const query=new URLSearchParams({
-  path,
-  ...params
- });
-
+ const query=new URLSearchParams({path,...params});
  const response=await fetch('/api/football?'+query.toString());
  const data=await response.json();
 
  if(!response.ok){
   throw new Error(data.message||data.error||'Error '+response.status);
  }
-
  return data;
 }
 
@@ -254,11 +250,10 @@ async function loadUpcoming(){
   const from=localDate(new Date());
   const end=new Date();
   end.setDate(end.getDate()+period-1);
-  const to=localDate(end);
 
   const data=await api('matches',{
    dateFrom:from,
-   dateTo:to,
+   dateTo:localDate(end),
    status:'SCHEDULED'
   });
 
@@ -267,7 +262,6 @@ async function loadUpcoming(){
   games=upcomingGames;
 
   $('#subtitle').textContent=games.length+' partidos · Próximos '+period+' días';
-
   updateFilters();
   renderMatches();
 
@@ -290,10 +284,7 @@ function updateFilters(){
   '<option value="">Todos los países</option>'+
   countries.map(c=>`<option value="${escapeHTML(c)}">${escapeHTML(c)}</option>`).join('');
 
- if(countries.includes(oldCountry)){
-  $('#countryFilter').value=oldCountry;
- }
-
+ if(countries.includes(oldCountry))$('#countryFilter').value=oldCountry;
  updateLeagueFilter();
 }
 
@@ -338,7 +329,9 @@ function renderMatches(){
      ${g.homeLogo?`<img src="${escapeHTML(g.homeLogo)}" alt="">`:''}
      ${escapeHTML(g.home)}
     </div>
+
     <div class="score">${scoreText(g)}</div>
+
     <div class="team">
      ${g.awayLogo?`<img src="${escapeHTML(g.awayLogo)}" alt="">`:''}
      ${escapeHTML(g.away)}
@@ -347,7 +340,7 @@ function renderMatches(){
 
    <div class="matchfoot">
     <span>${escapeHTML(g.status)}</span>
-    <button class="details" data-id="${g.id}">Ver detalles →</button>
+    <button class="details" data-id="${g.id}">Ver análisis →</button>
    </div>
   </article>`;
  }).join(''):'<div class="empty">No se encontraron partidos con estos filtros.</div>';
@@ -371,6 +364,7 @@ function changeMode(next){
   games=liveGames;
   $('#subtitle').textContent=games.length+' partidos en directo';
   renderMatches();
+
   if(!games.length){
    $('#matches').innerHTML='<div class="empty">No hay partidos en directo disponibles.</div>';
   }
@@ -379,7 +373,19 @@ function changeMode(next){
  }
 }
 
-/* DETALLES */
+/* FICHA DE CADA EQUIPO */
+
+async function getTeam(id){
+ if(!id)throw new Error('No hay identificador del equipo');
+
+ if(teamCache[id])return teamCache[id];
+
+ const data=await api('teams/'+id);
+ teamCache[id]=data;
+ return data;
+}
+
+/* DETALLES DEL PARTIDO */
 
 function openGame(id){
  selected=games.find(g=>g.id===id);
@@ -400,11 +406,80 @@ async function setTab(){
   x.classList.toggle('active',x.dataset.tab===tab)
  );
 
- $('#tabContent').innerHTML='<div class="loading">Cargando...</div>';
+ $('#tabContent').innerHTML='<div class="loading">Cargando datos de los equipos...</div>';
 
- if(tab==='form')await loadForm();
- if(tab==='table')await loadTable();
+ try{
+  if(tab==='form')await loadForm();
+  if(tab==='table')await loadTable();
+ }catch(e){
+  $('#tabContent').innerHTML='<div class="empty">No se pudieron cargar los datos.<br>'+escapeHTML(e.message)+'</div>';
+ }
 }
+
+/* IDENTIFICAR LIGA NACIONAL */
+
+function getDomesticLeague(team,selectedCode){
+ const competitions=team.runningCompetitions||[];
+
+ return competitions.find(c=>
+  c.type==='LEAGUE'&&c.code!==selectedCode
+ )||null;
+}
+
+function competitionName(code,team){
+ const found=(team.runningCompetitions||[]).find(c=>c.code===code);
+ return found?.name||code;
+}
+
+/* ÚLTIMOS PARTIDOS POR COMPETICIÓN */
+
+async function getLastMatches(teamId,competitionCode){
+ if(!teamId||!competitionCode)return [];
+
+ const data=await api(`teams/${teamId}/matches`,{
+  status:'FINISHED',
+  competitions:competitionCode,
+  limit:'5'
+ });
+
+ return (data.matches||[])
+  .sort((a,b)=>new Date(b.utcDate)-new Date(a.utcDate))
+  .slice(0,5);
+}
+
+function renderResults(teamName,matches){
+ if(!matches.length){
+  return '<div class="empty">No hay partidos disponibles para esta competición en tu plan.</div>';
+ }
+
+ return matches.map(m=>{
+  const home=m.homeTeam?.name||'';
+  const away=m.awayTeam?.name||'';
+  const hg=m.score?.fullTime?.home;
+  const ag=m.score?.fullTime?.away;
+
+  const isHome=m.homeTeam?.id===m.homeTeam?.id &&
+   m.homeTeam?.name===teamName;
+
+  const own=isHome?hg:ag;
+  const other=isHome?ag:hg;
+
+  let result='D';
+  if(own!==null&&own!==undefined&&other!==null&&other!==undefined){
+   if(own>other)result='W';
+   if(own<other)result='L';
+  }
+
+  return `<div class="result">
+   <span class="date">${new Date(m.utcDate).toLocaleDateString('es-ES',{day:'2-digit',month:'2-digit',year:'2-digit'})}</span>
+   <span class="fixture">${escapeHTML(home)} - ${escapeHTML(away)}</span>
+   <span class="resultscore">${hg??'-'} - ${ag??'-'}</span>
+   <span class="badge ${result}">${result}</span>
+  </div>`;
+ }).join('');
+}
+
+/* PESTAÑA: ÚLTIMOS PARTIDOS */
 
 async function loadForm(){
  if(!selected.homeId||!selected.awayId){
@@ -412,76 +487,151 @@ async function loadForm(){
   return;
  }
 
+ const [homeTeam,awayTeam]=await Promise.all([
+  getTeam(selected.homeId),
+  getTeam(selected.awayId)
+ ]);
+
+ const homeLeague=getDomesticLeague(homeTeam,selected.code);
+ const awayLeague=getDomesticLeague(awayTeam,selected.code);
+
+ const jobs=[
+  getLastMatches(selected.homeId,selected.code),
+  getLastMatches(selected.awayId,selected.code),
+  homeLeague?getLastMatches(selected.homeId,homeLeague.code):Promise.resolve([]),
+  awayLeague?getLastMatches(selected.awayId,awayLeague.code):Promise.resolve([])
+ ];
+
+ const [homeCup,awayCup,homeDomestic,awayDomestic]=await Promise.all(jobs);
+
+ function teamBlock(name,logo,league,domestic,cup){
+  return `
+   <div class="teamblock">
+    <div class="teamheading">
+     ${logo?`<img src="${escapeHTML(logo)}" style="width:25px;height:25px;object-fit:contain;vertical-align:middle;margin-right:7px">`:''}
+     ${escapeHTML(name)}
+    </div>
+
+    <div class="comptitle">
+     ${league?'Liga nacional: '+escapeHTML(league.name):'Liga nacional no disponible'}
+    </div>
+    ${league?renderResults(name,domestic):
+     '<div class="info">No encontramos una liga nacional disponible para este equipo en tu plan de datos.</div>'}
+
+    <div class="comptitle">
+     Competición seleccionada: ${escapeHTML(selected.comp)}
+    </div>
+    ${renderResults(name,cup)}
+   </div>`;
+ }
+
+ $('#tabContent').innerHTML=
+  teamBlock(selected.home,selected.homeLogo,homeLeague,homeDomestic,homeCup)+
+  teamBlock(selected.away,selected.awayLogo,awayLeague,awayDomestic,awayCup);
+}
+
+/* CLASIFICACIONES */
+
+async function getStandings(code){
+ if(!code)return null;
+
  try{
-  const [a,b]=await Promise.all([
-   api(`teams/${selected.homeId}/matches`,{status:'FINISHED',limit:'5'}),
-   api(`teams/${selected.awayId}/matches`,{status:'FINISHED',limit:'5'})
-  ]);
-
-  function teamResults(team,rows){
-   const matches=rows.matches||[];
-
-   return '<h3>'+escapeHTML(team)+' · Últimos resultados</h3>'+
-   (matches.length?matches.map(m=>{
-    const home=m.homeTeam.name;
-    const away=m.awayTeam.name;
-    const hg=m.score.fullTime.home;
-    const ag=m.score.fullTime.away;
-
-    let result='D';
-
-    const isHome=home===team;
-    const own=isHome?hg:ag;
-    const other=isHome?ag:hg;
-
-    if(own>other)result='W';
-    if(own<other)result='L';
-
-    return `<div class="result">
-     <span class="date">${formatDate(m.utcDate).split(',')[0]}</span>
-     <span class="fixture">${escapeHTML(home)} - ${escapeHTML(away)}</span>
-     <span class="resultscore">${hg??'-'} - ${ag??'-'}</span>
-     <span class="badge ${result}">${result}</span>
-    </div>`;
-   }).join(''):'<div class="empty">No hay resultados disponibles.</div>');
-  }
-
-  $('#tabContent').innerHTML=
-   teamResults(selected.home,a)+teamResults(selected.away,b);
-
+  const data=await api(`competitions/${code}/standings`);
+  return data.standings?.find(s=>s.type==='TOTAL')?.table||null;
  }catch(e){
-  $('#tabContent').innerHTML='<div class="empty">No se pudieron consultar los últimos resultados. '+escapeHTML(e.message)+'</div>';
+  return null;
  }
 }
 
+function renderTable(title,table){
+ if(!table||!table.length){
+  return `
+   <h3>${escapeHTML(title)}</h3>
+   <div class="info">
+    No hay clasificación disponible para esta competición.
+    Puede tratarse de una copa eliminatoria o de una competición no incluida en tu plan.
+   </div>`;
+ }
+
+ return `
+  <h3>${escapeHTML(title)}</h3>
+  <div class="tablewrap">
+   <table>
+    <thead>
+     <tr><th>Pos</th><th>Equipo</th><th>PJ</th><th>DG</th><th>PTS</th></tr>
+    </thead>
+    <tbody>
+     ${table.map(r=>`
+      <tr>
+       <td>${r.position}</td>
+       <td><b>${escapeHTML(r.team?.name)}</b></td>
+       <td>${r.playedGames}</td>
+       <td>${r.goalDifference}</td>
+       <td><b>${r.points}</b></td>
+      </tr>
+     `).join('')}
+    </tbody>
+   </table>
+  </div>`;
+}
+
 async function loadTable(){
- if(!selected.code){
-  $('#tabContent').innerHTML='<div class="empty">No hay código de competición disponible.</div>';
-  return;
+ const [homeTeam,awayTeam]=await Promise.all([
+  getTeam(selected.homeId),
+  getTeam(selected.awayId)
+ ]);
+
+ const homeLeague=getDomesticLeague(homeTeam,selected.code);
+ const awayLeague=getDomesticLeague(awayTeam,selected.code);
+
+ const codes=[...new Set([
+  homeLeague?.code,
+  awayLeague?.code,
+  selected.code
+ ].filter(Boolean))];
+
+ const tables={};
+ await Promise.all(codes.map(async code=>{
+  tables[code]=await getStandings(code);
+ }));
+
+ let html='';
+
+ if(homeLeague){
+  html+=renderTable(
+   selected.home+' · '+homeLeague.name,
+   tables[homeLeague.code]
+  );
+ }else{
+  html+='<div class="info">'+escapeHTML(selected.home)+': no encontramos su liga nacional en los datos disponibles.</div>';
  }
 
- try{
-  const data=await api(`competitions/${selected.code}/standings`);
-  const table=data.standings?.find(s=>s.type==='TOTAL')?.table||[];
-
-  $('#tabContent').innerHTML=
-   '<h3>Clasificación · '+escapeHTML(selected.comp)+'</h3>'+
-   (table.length?
-    '<div class="tablewrap"><table><thead><tr><th>Pos</th><th>Equipo</th><th>PJ</th><th>DG</th><th>PTS</th></tr></thead><tbody>'+
-    table.map(r=>`
-     <tr>
-      <td>${r.position}</td>
-      <td><b>${escapeHTML(r.team.name)}</b></td>
-      <td>${r.playedGames}</td>
-      <td>${r.goalDifference}</td>
-      <td><b>${r.points}</b></td>
-     </tr>`).join('')+
-    '</tbody></table></div>':
-    '<div class="empty">No hay clasificación disponible para esta competición en tu plan.</div>');
-
- }catch(e){
-  $('#tabContent').innerHTML='<div class="empty">La clasificación no está disponible para esta competición o temporada. '+escapeHTML(e.message)+'</div>';
+ if(awayLeague){
+  if(awayLeague.code!==homeLeague?.code){
+   html+=renderTable(
+    selected.away+' · '+awayLeague.name,
+    tables[awayLeague.code]
+   );
+  }else{
+   html+='<div class="info">'+escapeHTML(selected.away)+' comparte la misma liga nacional que el equipo local.</div>';
+  }
+ }else{
+  html+='<div class="info">'+escapeHTML(selected.away)+': no encontramos su liga nacional en los datos disponibles.</div>';
  }
+
+ if(selected.competitionType==='LEAGUE'){
+  html+=renderTable(selected.comp,tables[selected.code]);
+ }else{
+  html+=`
+   <h3>${escapeHTML(selected.comp)}</h3>
+   <div class="info">
+    Esta competición es una copa o torneo eliminatorio.
+    No mostraremos una clasificación de liga que no corresponda.
+    La tabla o el cuadro de esta competición dependerá de los datos que proporcione la API.
+   </div>`;
+ }
+
+ $('#tabContent').innerHTML=html;
 }
 
 /* EVENTOS */
@@ -528,6 +678,9 @@ setInterval(()=>{
  if(mode==='live')loadLive();
 },180000);
 
+if('serviceWorker'in navigator){
+ navigator.serviceWorker.register('./sw.js').catch(()=>{});
+}
 </script>
 </body>
 </html>
