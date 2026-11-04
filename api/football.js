@@ -1,4 +1,49 @@
 export default async function handler(req, res) {
+  const source = req.query.source;
+
+  // CONEXIÓN 2: API-FOOTBALL
+  if (source === "apisports") {
+    const apiSportsKey = process.env.APISPORTS_KEY;
+
+    if (!apiSportsKey) {
+      return res.status(500).json({
+        error: "Falta configurar APISPORTS_KEY en Vercel"
+      });
+    }
+
+    const path = req.query.path || "status";
+
+    // Por ahora solo comprobamos el estado de la cuenta
+    if (path !== "status") {
+      return res.status(400).json({
+        error: "Ruta de comprobación no permitida"
+      });
+    }
+
+    try {
+      const response = await fetch(
+        "https://v3.football.api-sports.io/status",
+        {
+          headers: {
+            "x-apisports-key": apiSportsKey
+          }
+        }
+      );
+
+      const data = await response.json();
+
+      res.setHeader("Cache-Control", "no-store");
+
+      return res.status(response.status).json(data);
+
+    } catch (error) {
+      return res.status(502).json({
+        error: "Error conectando con API-Football"
+      });
+    }
+  }
+
+  // CONEXIÓN 1: FOOTBALL-DATA.ORG
   const token = process.env.FOOTBALL_DATA_TOKEN;
 
   if (!token) {
@@ -26,6 +71,7 @@ export default async function handler(req, res) {
   for (const [key, value] of Object.entries(req.query)) {
     if (
       key !== "path" &&
+      key !== "source" &&
       key !== "utm_source" &&
       typeof value === "string"
     ) {
