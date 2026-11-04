@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="es">
 <head>
@@ -11,28 +10,51 @@
 <title>Football Stats</title>
 
 <style>
-:root{--bg:#090b10;--red:#e51d35;--green:#198b3b;--loss:#c92c25;--line:#292f3b}
+:root{
+ --bg:#090b10;--red:#e51d35;--green:#198b3b;
+ --loss:#c92c25;--line:#292f3b;--card:#171c26;
+}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;color:white}
-.top{height:72px;padding:17px 18px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #222630;position:sticky;top:0;background:#090b10;z-index:3}
-.brand{font-size:20px;font-weight:850}.brand span{color:var(--red)}
+button,input,select{font:inherit}
+button{cursor:pointer}
+.top{height:72px;padding:17px 18px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #222630;position:sticky;top:0;background:#090b10;z-index:10}
+.brand{font-size:20px;font-weight:850}
+.brand span{color:var(--red)}
 .live{font-size:11px;color:#b8c0cc;border:1px solid #343a47;padding:7px 10px;border-radius:20px}
 .live i{display:inline-block;width:7px;height:7px;background:#f04444;border-radius:50%;margin-right:5px}
-.wrap{max-width:900px;margin:auto;padding:18px 12px 40px}
+.wrap{max-width:950px;margin:auto;padding:18px 12px 40px}
 .heading{display:flex;justify-content:space-between;align-items:center;margin:6px 4px 14px}
 .heading h1{font-size:23px;margin:0}
 .sub{color:#9ca3af;font-size:13px;margin-top:5px}
+.section-title{font-size:13px;color:#aeb5c2;font-weight:800;margin:18px 4px 11px;letter-spacing:.5px}
 .search{width:100%;padding:14px 15px;border-radius:12px;border:1px solid #333947;background:#151922;color:white;font-size:16px;margin:8px 0 14px}
 .modebar{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:4px 0 16px}
 .mode{padding:13px 8px;border:1px solid #343a47;background:#151922;color:#c7ccd5;border-radius:11px;font-weight:750;font-size:14px}
 .mode.active{background:var(--red);border-color:var(--red);color:white}
-.filters{display:flex;gap:8px;overflow:auto;padding-bottom:14px}
-.chip{white-space:nowrap;border:1px solid #343a47;background:#151922;color:#d7dbe3;padding:9px 13px;border-radius:22px;font-size:13px}
-.chip.active{background:white;color:#202431;font-weight:700}
-.section-title{font-size:14px;color:#aeb5c2;font-weight:700;margin:12px 4px}
 .selectrow{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:0 0 14px}
 .selectbox{width:100%;min-width:0;padding:12px 10px;border-radius:10px;border:1px solid #343a47;background:#151922;color:white;font-size:13px}
 .datefilters{display:flex;gap:8px;overflow:auto;padding:0 0 13px}
+.chip{white-space:nowrap;border:1px solid #343a47;background:#151922;color:#d7dbe3;padding:9px 13px;border-radius:22px;font-size:13px}
+.chip.active{background:white;color:#202431;font-weight:700}
+
+/* LIGAS */
+.league-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.league-card{display:flex;align-items:center;gap:9px;min-height:57px;padding:12px;text-align:left;border:1px solid #303745;border-radius:12px;background:#171c26;color:white;font-weight:750;font-size:13px}
+.league-card:active{border-color:var(--red)}
+.all-leagues{display:flex;flex-direction:column;gap:5px;width:100%;margin-top:12px;padding:16px;border:1px solid #e51d35;border-radius:12px;background:#21141a;color:white;text-align:left;font-weight:800;font-size:15px}
+.all-leagues span{font-size:12px;color:#c7aab0;font-weight:500}
+.all-panel{margin-top:12px;padding:14px;background:#151922;border:1px solid #303745;border-radius:13px}
+.country-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.country-button{border:1px solid #343a47;background:#202632;color:white;padding:11px 8px;border-radius:9px;text-align:left;font-size:12px;font-weight:650}
+.country-button.active{border-color:var(--red);background:#38202a}
+.catalogue-item{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:12px 5px;border-bottom:1px solid #303745;color:white;font-size:13px}
+.catalogue-item button{border:1px solid #454d5c;background:#252c39;color:white;padding:7px 10px;border-radius:7px;font-size:11px}
+.small-tag{display:inline-block;color:#d4d9e2;background:#303745;border-radius:5px;padding:4px 6px;font-size:10px;margin-top:5px}
+.catalogue-note{color:#aeb5c2;font-size:12px;line-height:1.5;padding:10px 4px}
+.hidden{display:none!important}
+
+/* PARTIDOS */
 .match{background:#171c26;border:1px solid var(--line);border-radius:13px;margin:9px 0;overflow:hidden}
 .matchtop{display:flex;justify-content:space-between;gap:8px;padding:12px 14px;color:#aeb5c2;font-size:12px;border-bottom:1px solid var(--line)}
 .matchmain{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:16px 14px;gap:8px}
@@ -42,6 +64,8 @@ body{margin:0;background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,
 .score{font-size:20px;font-weight:800;white-space:nowrap}
 .matchfoot{display:flex;justify-content:space-between;align-items:center;padding:0 14px 12px;color:#aeb5c2;font-size:12px}
 .details{border:0;background:#252c39;color:white;border-radius:8px;padding:8px 12px;font-weight:650}
+
+/* ANALISIS */
 .panel{background:white;color:#252936;border-radius:16px 16px 0 0;min-height:50vh;margin:18px -12px 0;overflow:hidden}
 .panelhead{padding:20px 18px 16px;border-bottom:1px solid #e8e9ed;display:flex;justify-content:space-between;align-items:center}
 .panelhead h2{font-size:20px;margin:0}
@@ -64,31 +88,100 @@ th{background:#eeeef2;text-align:left;padding:12px 9px}
 td{padding:12px 9px;border-bottom:1px solid #eee}
 .empty{text-align:center;color:#737987;padding:25px 15px}
 .notice{font-size:12px;color:#aab1be;text-align:center;padding:16px 10px}
-.hidden{display:none!important}
 .loading{text-align:center;color:#aeb5c2;padding:30px}
 .error{color:#ff8585;text-align:center;padding:20px}
 .teamblock{margin-bottom:25px}
 .teamheading{padding:13px 15px;background:#f0f0f3;font-weight:800;font-size:15px}
 .comptitle{padding:12px 14px 5px;font-size:13px;font-weight:750;color:#555}
 .info{padding:13px 15px;background:#f5f5f7;color:#555;font-size:13px;line-height:1.5;margin:10px;border-radius:9px}
-.tag{display:inline-block;background:#eee;color:#555;padding:4px 7px;border-radius:5px;font-size:10px;margin-left:5px}
-@media(min-width:700px){.wrap{padding-top:28px}.panel{margin-left:0;margin-right:0;border-radius:16px}.matchmain{padding:19px 18px}}
+
+@media(min-width:700px){
+ .wrap{padding-top:28px}
+ .panel{margin-left:0;margin-right:0;border-radius:16px}
+ .matchmain{padding:19px 18px}
+ .league-grid{grid-template-columns:repeat(4,1fr)}
+ .country-grid{grid-template-columns:repeat(4,1fr)}
+}
 </style>
 </head>
 
 <body>
 <header class="top">
  <div class="brand">FOOTBALL <span>STATS</span></div>
- <div class="live"><i></i> FOOTBALL DATA</div>
+ <div class="live"><i></i> FOOTBALL STATS</div>
 </header>
 
 <main class="wrap">
+
  <div class="heading">
   <div>
-   <h1>Partidos</h1>
-   <div class="sub" id="subtitle">Conectando...</div>
+   <h1>Fútbol europeo</h1>
+   <div class="sub" id="subtitle">Cargando partidos...</div>
   </div>
  </div>
+
+ <section>
+  <div class="section-title">GRANDES LIGAS</div>
+
+  <div class="league-grid">
+   <button class="league-card" data-search="Premier League">🏴 Premier League</button>
+   <button class="league-card" data-search="LaLiga">🇪🇸 LaLiga</button>
+   <button class="league-card" data-search="Bundesliga">🇩🇪 Bundesliga</button>
+   <button class="league-card" data-search="Serie A">🇮🇹 Serie A</button>
+   <button class="league-card" data-search="Ligue 1">🇫🇷 Ligue 1</button>
+   <button class="league-card" data-search="Champions League">🏆 Champions League</button>
+   <button class="league-card" data-search="Europa League">🏆 Europa League</button>
+   <button class="league-card" data-search="Primeira Liga">🇵🇹 Primeira Liga</button>
+  </div>
+
+  <button id="allLeaguesButton" class="all-leagues">
+   🌍 TODAS LAS LIGAS
+   <span>Explorar países, primeras y segundas divisiones →</span>
+  </button>
+
+  <div id="allLeaguesPanel" class="all-panel hidden">
+   <div class="section-title" style="margin-top:2px">SELECCIONA UN PAÍS</div>
+
+   <div class="country-grid" id="countryGrid">
+    <button class="country-button" data-country="England">🏴 Inglaterra</button>
+    <button class="country-button" data-country="Spain">🇪🇸 España</button>
+    <button class="country-button" data-country="Germany">🇩🇪 Alemania</button>
+    <button class="country-button" data-country="Italy">🇮🇹 Italia</button>
+    <button class="country-button" data-country="France">🇫🇷 Francia</button>
+    <button class="country-button" data-country="Portugal">🇵🇹 Portugal</button>
+    <button class="country-button" data-country="Netherlands">🇳🇱 Países Bajos</button>
+    <button class="country-button" data-country="Belgium">🇧🇪 Bélgica</button>
+    <button class="country-button" data-country="Scotland">🏴 Escocia</button>
+    <button class="country-button" data-country="Turkey">🇹🇷 Turquía</button>
+    <button class="country-button" data-country="Greece">🇬🇷 Grecia</button>
+    <button class="country-button" data-country="Switzerland">🇨🇭 Suiza</button>
+    <button class="country-button" data-country="Austria">🇦🇹 Austria</button>
+    <button class="country-button" data-country="Poland">🇵🇱 Polonia</button>
+    <button class="country-button" data-country="Romania">🇷🇴 Rumanía</button>
+    <button class="country-button" data-country="Croatia">🇭🇷 Croacia</button>
+    <button class="country-button" data-country="Serbia">🇷🇸 Serbia</button>
+    <button class="country-button" data-country="Ukraine">🇺🇦 Ucrania</button>
+    <button class="country-button" data-country="Denmark">🇩🇰 Dinamarca</button>
+    <button class="country-button" data-country="Norway">🇳🇴 Noruega</button>
+    <button class="country-button" data-country="Sweden">🇸🇪 Suecia</button>
+    <button class="country-button" data-country="Ireland">🇮🇪 Irlanda</button>
+    <button class="country-button" data-country="Czech Republic">🇨🇿 Chequia</button>
+    <button class="country-button" data-country="Hungary">🇭🇺 Hungría</button>
+   </div>
+
+   <div class="section-title">COMPETICIONES DISPONIBLES</div>
+   <div id="europeLeagues" class="catalogue-note">
+    Selecciona un país para consultar su catálogo.
+   </div>
+
+   <div class="catalogue-note">
+    Catálogo histórico de API-Football, temporada 2024.
+    Los partidos actuales se consultan en football-data.org cuando están disponibles.
+   </div>
+  </div>
+ </section>
+
+ <div class="section-title">PARTIDOS</div>
 
  <div class="modebar">
   <button class="mode active" id="liveMode">● En directo</button>
@@ -121,7 +214,7 @@ td{padding:12px 9px;border-bottom:1px solid #eee}
  </div>
 
  <div class="notice">
-  Datos de football-data.org. La cobertura depende del plan contratado.
+  Partidos actuales: football-data.org · Catálogo ampliado: API-Football.
  </div>
 
  <section id="detail" class="panel hidden">
@@ -155,6 +248,7 @@ let mode='live';
 let period=7;
 let tab='form';
 let teamCache={};
+let catalogueCache={};
 
 function escapeHTML(s){
  return String(s??'').replace(/[&<>"']/g,c=>({
@@ -171,8 +265,7 @@ function localDate(d){
 
 function formatDate(date){
  return new Date(date).toLocaleString('es-ES',{
-  day:'2-digit',month:'2-digit',
-  hour:'2-digit',minute:'2-digit'
+  day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'
  });
 }
 
@@ -197,16 +290,110 @@ function mapMatch(m){
  };
 }
 
+/* FOOTBALL-DATA.ORG */
+
 async function api(path,params={}){
  const query=new URLSearchParams({path,...params});
  const response=await fetch('/api/football?'+query.toString());
  const data=await response.json();
 
- if(!response.ok){
-  throw new Error(data.message||data.error||'Error '+response.status);
- }
+ if(!response.ok)throw new Error(data.message||data.error||'Error '+response.status);
  return data;
 }
+
+/* API-FOOTBALL: CATALOGO */
+
+async function apiSports(path,params={}){
+ const query=new URLSearchParams({
+  source:'apisports',
+  path,
+  ...params
+ });
+
+ const response=await fetch('/api/football?'+query.toString());
+ const data=await response.json();
+
+ if(!response.ok)throw new Error(data.message||data.error||'Error '+response.status);
+
+ if(data.errors&&Object.keys(data.errors).length){
+  throw new Error(JSON.stringify(data.errors));
+ }
+
+ return data;
+}
+
+async function loadCountryLeagues(country){
+ const box=$('#europeLeagues');
+ box.innerHTML='<div class="loading">Consultando '+escapeHTML(country)+'...</div>';
+
+ document.querySelectorAll('.country-button').forEach(b=>{
+  b.classList.toggle('active',b.dataset.country===country);
+ });
+
+ if(catalogueCache[country]){
+  renderCatalogue(catalogueCache[country],country);
+  return;
+ }
+
+ try{
+  const data=await apiSports('leagues',{
+   country,
+   season:'2024'
+  });
+
+  const leagues=data.response||[];
+  catalogueCache[country]=leagues;
+  renderCatalogue(leagues,country);
+
+ }catch(error){
+  box.innerHTML='<div class="error">No se pudo consultar el catálogo.<br>'+escapeHTML(error.message)+'</div>';
+ }
+}
+
+function renderCatalogue(leagues,country){
+ const box=$('#europeLeagues');
+
+ if(!leagues.length){
+  box.innerHTML='<div class="empty">No aparecen competiciones para este país en la temporada consultada.</div>';
+  return;
+ }
+
+ const sorted=[...leagues].sort((a,b)=>{
+  const order={League:1,Cup:2};
+  return (order[a.league?.type]||3)-(order[b.league?.type]||3);
+ });
+
+ box.innerHTML=
+  '<div class="catalogue-note">'+sorted.length+
+  ' competiciones encontradas en '+escapeHTML(country)+
+  ' · Temporada 2024</div>'+
+  sorted.map(item=>{
+   const league=item.league||{};
+
+   return `
+    <div class="catalogue-item">
+     <div>
+      <div style="font-weight:750">${escapeHTML(league.name)}</div>
+      <div>
+       <span class="small-tag">${escapeHTML(league.type||'Competición')}</span>
+       <span class="small-tag">ID ${escapeHTML(league.id)}</span>
+      </div>
+     </div>
+     <button data-league-name="${escapeHTML(league.name)}">Buscar partidos</button>
+    </div>`;
+  }).join('');
+
+ box.querySelectorAll('[data-league-name]').forEach(button=>{
+  button.onclick=()=>{
+   $('#search').value=button.dataset.leagueName;
+   $('#allLeaguesPanel').classList.add('hidden');
+   changeMode('upcoming');
+   $('#search').scrollIntoView({behavior:'smooth',block:'center'});
+  };
+ });
+}
+
+/* PARTIDOS EN DIRECTO */
 
 function matchIsLive(g){
  return ['IN_PLAY','PAUSED','LIVE'].includes(g.status);
@@ -216,8 +403,6 @@ function scoreText(g){
  if(g.scoreHome===null||g.scoreHome===undefined)return 'VS';
  return `${g.scoreHome} : ${g.scoreAway??'-'}`;
 }
-
-/* PARTIDOS EN DIRECTO */
 
 async function loadLive(){
  $('#matches').innerHTML='<div class="loading">Buscando partidos en directo...</div>';
@@ -240,7 +425,7 @@ async function loadLive(){
  }
 }
 
-/* PRÓXIMOS PARTIDOS */
+/* PROXIMOS PARTIDOS */
 
 async function loadUpcoming(){
  $('#matches').innerHTML='<div class="loading">Consultando próximos partidos...</div>';
@@ -310,9 +495,7 @@ function renderMatches(){
 
  const list=games.filter(g=>{
   const search=(g.home+' '+g.away+' '+g.comp+' '+g.country).toLowerCase();
-  return search.includes(q)&&
-   (!country||g.country===country)&&
-   (!league||g.comp===league);
+  return search.includes(q)&&(!country||g.country===country)&&(!league||g.comp===league);
  });
 
  $('#matches').innerHTML=list.length?list.map(g=>{
@@ -323,21 +506,17 @@ function renderMatches(){
     <span>${escapeHTML(g.country)} · ${escapeHTML(g.comp)}</span>
     <span>${live?'🔴 EN DIRECTO':escapeHTML(g.date)}</span>
    </div>
-
    <div class="matchmain">
     <div class="team">
      ${g.homeLogo?`<img src="${escapeHTML(g.homeLogo)}" alt="">`:''}
      ${escapeHTML(g.home)}
     </div>
-
     <div class="score">${scoreText(g)}</div>
-
     <div class="team">
      ${g.awayLogo?`<img src="${escapeHTML(g.awayLogo)}" alt="">`:''}
      ${escapeHTML(g.away)}
     </div>
    </div>
-
    <div class="matchfoot">
     <span>${escapeHTML(g.status)}</span>
     <button class="details" data-id="${g.id}">Ver análisis →</button>
@@ -373,19 +552,16 @@ function changeMode(next){
  }
 }
 
-/* FICHA DE CADA EQUIPO */
+/* ANALISIS DE EQUIPOS */
 
 async function getTeam(id){
  if(!id)throw new Error('No hay identificador del equipo');
-
  if(teamCache[id])return teamCache[id];
 
  const data=await api('teams/'+id);
  teamCache[id]=data;
  return data;
 }
-
-/* DETALLES DEL PARTIDO */
 
 function openGame(id){
  selected=games.find(g=>g.id===id);
@@ -397,16 +573,15 @@ function openGame(id){
 
  tab='form';
  setTab();
-
  $('#detail').scrollIntoView({behavior:'smooth',block:'start'});
 }
 
 async function setTab(){
- document.querySelectorAll('.tab').forEach(x=>
-  x.classList.toggle('active',x.dataset.tab===tab)
- );
+ document.querySelectorAll('.tab').forEach(x=>{
+  x.classList.toggle('active',x.dataset.tab===tab);
+ });
 
- $('#tabContent').innerHTML='<div class="loading">Cargando datos de los equipos...</div>';
+ $('#tabContent').innerHTML='<div class="loading">Cargando datos...</div>';
 
  try{
   if(tab==='form')await loadForm();
@@ -416,22 +591,10 @@ async function setTab(){
  }
 }
 
-/* IDENTIFICAR LIGA NACIONAL */
-
 function getDomesticLeague(team,selectedCode){
  const competitions=team.runningCompetitions||[];
-
- return competitions.find(c=>
-  c.type==='LEAGUE'&&c.code!==selectedCode
- )||null;
+ return competitions.find(c=>c.type==='LEAGUE'&&c.code!==selectedCode)||null;
 }
-
-function competitionName(code,team){
- const found=(team.runningCompetitions||[]).find(c=>c.code===code);
- return found?.name||code;
-}
-
-/* ÚLTIMOS PARTIDOS POR COMPETICIÓN */
 
 async function getLastMatches(teamId,competitionCode){
  if(!teamId||!competitionCode)return [];
@@ -449,18 +612,13 @@ async function getLastMatches(teamId,competitionCode){
 
 function renderResults(teamName,matches){
  if(!matches.length){
-  return '<div class="empty">No hay partidos disponibles para esta competición en tu plan.</div>';
+  return '<div class="empty">No hay partidos disponibles para esta competición.</div>';
  }
 
  return matches.map(m=>{
-  const home=m.homeTeam?.name||'';
-  const away=m.awayTeam?.name||'';
+  const isHome=m.homeTeam?.name===teamName;
   const hg=m.score?.fullTime?.home;
   const ag=m.score?.fullTime?.away;
-
-  const isHome=m.homeTeam?.id===m.homeTeam?.id &&
-   m.homeTeam?.name===teamName;
-
   const own=isHome?hg:ag;
   const other=isHome?ag:hg;
 
@@ -472,14 +630,12 @@ function renderResults(teamName,matches){
 
   return `<div class="result">
    <span class="date">${new Date(m.utcDate).toLocaleDateString('es-ES',{day:'2-digit',month:'2-digit',year:'2-digit'})}</span>
-   <span class="fixture">${escapeHTML(home)} - ${escapeHTML(away)}</span>
+   <span class="fixture">${escapeHTML(m.homeTeam?.name)} - ${escapeHTML(m.awayTeam?.name)}</span>
    <span class="resultscore">${hg??'-'} - ${ag??'-'}</span>
    <span class="badge ${result}">${result}</span>
   </div>`;
  }).join('');
 }
-
-/* PESTAÑA: ÚLTIMOS PARTIDOS */
 
 async function loadForm(){
  if(!selected.homeId||!selected.awayId){
@@ -495,14 +651,12 @@ async function loadForm(){
  const homeLeague=getDomesticLeague(homeTeam,selected.code);
  const awayLeague=getDomesticLeague(awayTeam,selected.code);
 
- const jobs=[
+ const [homeCup,awayCup,homeDomestic,awayDomestic]=await Promise.all([
   getLastMatches(selected.homeId,selected.code),
   getLastMatches(selected.awayId,selected.code),
   homeLeague?getLastMatches(selected.homeId,homeLeague.code):Promise.resolve([]),
   awayLeague?getLastMatches(selected.awayId,awayLeague.code):Promise.resolve([])
- ];
-
- const [homeCup,awayCup,homeDomestic,awayDomestic]=await Promise.all(jobs);
+ ]);
 
  function teamBlock(name,logo,league,domestic,cup){
   return `
@@ -511,16 +665,9 @@ async function loadForm(){
      ${logo?`<img src="${escapeHTML(logo)}" style="width:25px;height:25px;object-fit:contain;vertical-align:middle;margin-right:7px">`:''}
      ${escapeHTML(name)}
     </div>
-
-    <div class="comptitle">
-     ${league?'Liga nacional: '+escapeHTML(league.name):'Liga nacional no disponible'}
-    </div>
-    ${league?renderResults(name,domestic):
-     '<div class="info">No encontramos una liga nacional disponible para este equipo en tu plan de datos.</div>'}
-
-    <div class="comptitle">
-     Competición seleccionada: ${escapeHTML(selected.comp)}
-    </div>
+    <div class="comptitle">${league?'Liga nacional: '+escapeHTML(league.name):'Liga nacional no disponible'}</div>
+    ${league?renderResults(name,domestic):'<div class="info">No encontramos una liga nacional disponible para este equipo.</div>'}
+    <div class="comptitle">Competición seleccionada: ${escapeHTML(selected.comp)}</div>
     ${renderResults(name,cup)}
    </div>`;
  }
@@ -545,21 +692,15 @@ async function getStandings(code){
 
 function renderTable(title,table){
  if(!table||!table.length){
-  return `
-   <h3>${escapeHTML(title)}</h3>
-   <div class="info">
-    No hay clasificación disponible para esta competición.
-    Puede tratarse de una copa eliminatoria o de una competición no incluida en tu plan.
-   </div>`;
+  return `<h3>${escapeHTML(title)}</h3>
+   <div class="info">No hay clasificación disponible para esta competición.</div>`;
  }
 
  return `
   <h3>${escapeHTML(title)}</h3>
   <div class="tablewrap">
    <table>
-    <thead>
-     <tr><th>Pos</th><th>Equipo</th><th>PJ</th><th>DG</th><th>PTS</th></tr>
-    </thead>
+    <thead><tr><th>Pos</th><th>Equipo</th><th>PJ</th><th>DG</th><th>PTS</th></tr></thead>
     <tbody>
      ${table.map(r=>`
       <tr>
@@ -568,8 +709,7 @@ function renderTable(title,table){
        <td>${r.playedGames}</td>
        <td>${r.goalDifference}</td>
        <td><b>${r.points}</b></td>
-      </tr>
-     `).join('')}
+      </tr>`).join('')}
     </tbody>
    </table>
   </div>`;
@@ -591,6 +731,7 @@ async function loadTable(){
  ].filter(Boolean))];
 
  const tables={};
+
  await Promise.all(codes.map(async code=>{
   tables[code]=await getStandings(code);
  }));
@@ -598,37 +739,26 @@ async function loadTable(){
  let html='';
 
  if(homeLeague){
-  html+=renderTable(
-   selected.home+' · '+homeLeague.name,
-   tables[homeLeague.code]
-  );
+  html+=renderTable(selected.home+' · '+homeLeague.name,tables[homeLeague.code]);
  }else{
-  html+='<div class="info">'+escapeHTML(selected.home)+': no encontramos su liga nacional en los datos disponibles.</div>';
+  html+='<div class="info">'+escapeHTML(selected.home)+': no encontramos su liga nacional.</div>';
  }
 
  if(awayLeague){
   if(awayLeague.code!==homeLeague?.code){
-   html+=renderTable(
-    selected.away+' · '+awayLeague.name,
-    tables[awayLeague.code]
-   );
+   html+=renderTable(selected.away+' · '+awayLeague.name,tables[awayLeague.code]);
   }else{
-   html+='<div class="info">'+escapeHTML(selected.away)+' comparte la misma liga nacional que el equipo local.</div>';
+   html+='<div class="info">Ambos equipos comparten la misma liga nacional.</div>';
   }
  }else{
-  html+='<div class="info">'+escapeHTML(selected.away)+': no encontramos su liga nacional en los datos disponibles.</div>';
+  html+='<div class="info">'+escapeHTML(selected.away)+': no encontramos su liga nacional.</div>';
  }
 
  if(selected.competitionType==='LEAGUE'){
   html+=renderTable(selected.comp,tables[selected.code]);
  }else{
-  html+=`
-   <h3>${escapeHTML(selected.comp)}</h3>
-   <div class="info">
-    Esta competición es una copa o torneo eliminatorio.
-    No mostraremos una clasificación de liga que no corresponda.
-    La tabla o el cuadro de esta competición dependerá de los datos que proporcione la API.
-   </div>`;
+  html+=`<h3>${escapeHTML(selected.comp)}</h3>
+   <div class="info">Esta competición es una copa o torneo eliminatorio. No tiene una clasificación de liga convencional.</div>`;
  }
 
  $('#tabContent').innerHTML=html;
@@ -647,9 +777,9 @@ $('#dateFilters').addEventListener('click',e=>{
 
  period=Number(b.dataset.days);
 
- document.querySelectorAll('#dateFilters .chip').forEach(x=>
-  x.classList.toggle('active',x===b)
- );
+ document.querySelectorAll('#dateFilters .chip').forEach(x=>{
+  x.classList.toggle('active',x===b);
+ });
 
  loadUpcoming();
 });
@@ -661,14 +791,36 @@ $('#countryFilter').addEventListener('change',()=>{
 
 $('#leagueFilter').addEventListener('change',renderMatches);
 
-document.querySelectorAll('.tab').forEach(x=>
+document.querySelectorAll('.tab').forEach(x=>{
  x.addEventListener('click',()=>{
   tab=x.dataset.tab;
   setTab();
- })
-);
+ });
+});
 
 $('#close').onclick=()=>$('#detail').classList.add('hidden');
+
+/* BOTON TODAS LAS LIGAS */
+
+$('#allLeaguesButton').onclick=()=>{
+ $('#allLeaguesPanel').classList.toggle('hidden');
+};
+
+/* SELECCIONAR PAIS */
+
+document.querySelectorAll('.country-button').forEach(button=>{
+ button.onclick=()=>loadCountryLeagues(button.dataset.country);
+});
+
+/* GRANDES LIGAS */
+
+document.querySelectorAll('.league-card').forEach(button=>{
+ button.onclick=()=>{
+  $('#search').value=button.dataset.search;
+  changeMode('upcoming');
+  $('#search').scrollIntoView({behavior:'smooth',block:'center'});
+ };
+});
 
 /* INICIO */
 
